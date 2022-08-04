@@ -1,0 +1,8 @@
+[
+    { "id": "0", "val": false },
+    { "id": "1", "val": false },
+    { "id": "2", "val": false },
+    { "id": "3", "val": false },
+    { "id": "4", "val": false },
+    { "id": "5", "val": "Hello world!" }
+]

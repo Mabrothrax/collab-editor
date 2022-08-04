@@ -1,0 +1,51 @@
+<html>
+<body>
+    <label><input id="0" type="checkbox" name="first" value="1">1</label>
+    <label><input id="1" type="checkbox" name="first" value=”2”>2</label>
+    <label><input id="2" type="checkbox" name="first" value="3">3</label>
+    <label><input id="3" type="checkbox" name="second" value="a">a</label>
+    <label><input id="4" type="checkbox" name="second" value=”b”>b</label>
+    <label><input id="5" type="text" name="third" value="">text</label>
+</body>
+<script src="/socket.io/socket.io.js"></script>
+<script>
+    const socket = io();
+    const checkboxes = document.querySelectorAll("input[type=checkbox]");
+    const textFields = document.querySelectorAll("input[type=text]");
+    
+    checkboxes.forEach(input => {
+        input.addEventListener('input', (event) => {
+            socket.emit('val clicked', {val: input.checked, el: event.target.id, type: event.target.type});
+        });
+    });
+
+    textFields.forEach(input => {
+        console.log(input);
+        input.addEventListener('change', (event) => {
+            socket.emit('val clicked', {val: input.value, el: event.target.id, type: event.target.type});
+        });
+    });
+
+    socket.on('historic state', function(val) {
+        if(val.length) {
+            val.forEach((input) => {
+                const field = document.getElementById(input.id);
+                if(field.type === "text") {
+                    field.value = input.val;
+                } else if (field.type === "checkbox") {
+                    field.checked = input.val;
+                }
+            })
+        }
+    });
+        
+    socket.on('val provided', function(val) {
+        const input = document.getElementById(val.el);
+        if(input.type === "text") {
+            input.value = val.val;
+        } else if (input.type === "checkbox") {
+            input.checked = val.val;
+        }
+    });
+</script>
+</html>
