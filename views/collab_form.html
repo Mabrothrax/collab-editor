@@ -14,19 +14,19 @@
     const textFields = document.querySelectorAll("input[type=text]");
     
     checkboxes.forEach(input => {
-        input.addEventListener('input', (event) => {
-            socket.emit('val clicked', {val: input.checked, el: event.target.id, type: event.target.type});
+        input.addEventListener("input", (event) => {
+            socket.emit("val clicked", {val: input.checked, el: event.target.id, type: event.target.type});
         });
     });
 
     textFields.forEach(input => {
         console.log(input);
-        input.addEventListener('change', (event) => {
-            socket.emit('val clicked', {val: input.value, el: event.target.id, type: event.target.type});
+        input.addEventListener("change", (event) => {
+            socket.emit("val clicked", {val: input.value, el: event.target.id, type: event.target.type});
         });
     });
 
-    socket.on('historic state', function(val) {
+    socket.on("historic state", function(val) {
         if(val.length) {
             val.forEach((input) => {
                 const field = document.getElementById(input.id);
@@ -39,7 +39,7 @@
         }
     });
         
-    socket.on('val provided', function(val) {
+    socket.on("val provided", function(val) {
         const input = document.getElementById(val.el);
         if(input.type === "text") {
             input.value = val.val;
