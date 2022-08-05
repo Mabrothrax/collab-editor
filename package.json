@@ -5,7 +5,8 @@
   "main": "app.js",
   "scripts": {
     "test": "mocha",
-    "run": "node app.js"
+    "run": "node app.js",
+    "run-cluster": "node cluster.js"
   },
   "author": "Adrian Mucha",
   "license": "MIT",
