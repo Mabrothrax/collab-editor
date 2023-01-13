@@ -1,5 +1,7 @@
 # collab-editor
 
+Nothing serious, just to showcase collaborative editing possibilites that socket.io and node has.
+
 Instalation:
 
 ```npm install```
